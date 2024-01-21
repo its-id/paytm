@@ -5,7 +5,7 @@ dotenv.config();
 
 mongoose.connect(process.env.DB_URL);
 
-const AccountsSchema = new mongoose.Schema({
+const AccountSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
@@ -18,4 +18,4 @@ const AccountsSchema = new mongoose.Schema({
   },
 });
 
-export const Accounts = mongoose.model('account', AccountsSchema);
+export const Account = mongoose.model('account', AccountSchema);

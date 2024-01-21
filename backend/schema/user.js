@@ -1,32 +1,10 @@
 import { z } from 'zod';
 
 export const createUserSchema = z.object({
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-    trim: true,
-    lowercase: true,
-    minLength: 3,
-    maxLength: 30,
-  },
-  password: {
-    type: String,
-    required: true,
-    minLength: 6,
-  },
-  firstName: {
-    type: String,
-    required: true,
-    trim: true,
-    maxLength: 50,
-  },
-  lastName: {
-    type: String,
-    required: true,
-    trim: true,
-    maxLength: 50,
-  },
+  email: z.string().email(),
+  firstName: z.string(),
+  lastName: z.string(),
+  password: z.string(),
 });
 
 export const signInUserSchema = z.object({
@@ -35,7 +13,7 @@ export const signInUserSchema = z.object({
 });
 
 export const updateUserSchema = z.object({
-  firstName: z.string(),
-  lastName: z.string(),
-  password: z.string(),
+  firstName: z.string().optional(),
+  lastName: z.string().optional(),
+  password: z.string().optional(),
 });
