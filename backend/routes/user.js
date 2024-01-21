@@ -3,9 +3,9 @@ import bcrypt from 'bcrypt';
 import { z } from 'zod';
 import dotenv from 'dotenv';
 
-import { createUserSchema, signInUserSchema } from '../schema/user';
-import { User } from '../db/user';
-import userMiddleware from '../middleware/auth';
+import { createUserSchema, signInUserSchema } from '../schema/user.js';
+import { User } from '../db/user.js';
+import userMiddleware from '../middleware/auth.js';
 const userRouter = express.Router();
 dotenv.config();
 
@@ -91,10 +91,12 @@ userRouter.put('/', userMiddleware, async (req, res) => {
     })
 })
 
-router.get('/bulk', async (req, res) => {
+userRouter.get('/bulk', async (req, res) => {
   const filter = req.query.filter || '';
 
   const users = await User.find({
+
+    //either firstName OR lastName contains the SUBSTRING present in filter, we return it.
     $or: [
       {
         firstName: {
